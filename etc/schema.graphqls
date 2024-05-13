@@ -1,0 +1,17 @@
+type Query {
+    satispayPayment(cart_id: String!): SatispayPayment
+    @resolver(class: "Satispay\\Satispay\\Model\\Resolver\\PaymentRequest")
+}
+
+type SatispayPayment {
+    payment_id: String,
+    amount: Float,
+    status: StatusEnum
+}
+
+enum StatusEnum {
+    PENDING
+    ACCEPTED
+    CANCELED
+    AUTHORIZED
+}
