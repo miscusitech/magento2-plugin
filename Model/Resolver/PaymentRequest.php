@@ -16,7 +16,6 @@ class PaymentRequest implements ResolverInterface
     private $urlBuilder;
     private $satispayConfig;
 
-
     public function __construct(
         GetCartForUser $getCartForUser,
         UrlInterface $urlBuilder,

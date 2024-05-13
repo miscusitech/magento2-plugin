@@ -1,6 +1,9 @@
 type Query {
     satispayPayment(cart_id: String!): SatispayPayment
     @resolver(class: "Satispay\\Satispay\\Model\\Resolver\\PaymentRequest")
+
+    getSatispayPayment(payment_id: String!): SatispayPayment
+    @resolver(class: "Satispay\\Satispay\\Model\\Resolver\\PaymentStatus")
 }
 
 type SatispayPayment {
