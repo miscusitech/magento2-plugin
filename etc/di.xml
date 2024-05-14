@@ -40,5 +40,10 @@
             <argument name="logger" xsi:type="object">Satispay\Satispay\Logger\Logger</argument>
         </arguments>
     </type>
+    <type name="Satispay\Satispay\Model\Resolver\PaymentRequest">
+        <arguments>
+            <argument name="satispayConfig" xsi:type="object">Satispay\Satispay\Model\Config</argument>
+        </arguments>
+    </type>
 </config>
 

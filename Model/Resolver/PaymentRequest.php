@@ -10,20 +10,19 @@ use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\UrlInterface;
 use Satispay\Satispay\Model\Config;
 
-class PaymentRequest implements ResolverInterface
+class PaymentRequest extends ResolverBase implements ResolverInterface
 {
     private $getCartForUser;
     private $urlBuilder;
-    private $satispayConfig;
 
     public function __construct(
+        Config $satispayConfig,
         GetCartForUser $getCartForUser,
         UrlInterface $urlBuilder,
-        Config $satispayConfig,
     ) {
+        parent::__construct($satispayConfig);
         $this->getCartForUser = $getCartForUser;
         $this->urlBuilder = $urlBuilder;
-        $this->satispayConfig = $satispayConfig;
     }
 
     /**
@@ -46,16 +45,6 @@ class PaymentRequest implements ResolverInterface
 
         if (!$cart->getIsActive()) {
             throw new GraphQlInputException(__('The cart is not active.'));
-        }
-
-        // Init SatispayGBusiness SDK
-        \SatispayGBusiness\Api::setPublicKey($this->satispayConfig->getPublicKey());
-        \SatispayGBusiness\Api::setPrivateKey($this->satispayConfig->getPrivateKey());
-        if ($this->satispayConfig->getSandbox()) {
-            \SatispayGBusiness\Api::setSandbox(true);
-            \SatispayGBusiness\Api::setKeyId($this->satispayConfig->getSandboxKeyId());
-        } else {
-            \SatispayGBusiness\Api::setKeyId($this->satispayConfig->getKeyId());
         }
 
         $cart->reserveOrderId();
