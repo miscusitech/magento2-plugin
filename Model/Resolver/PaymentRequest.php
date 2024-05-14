@@ -72,7 +72,7 @@ class PaymentRequest extends ResolverBase implements ResolverInterface
             throw new GraphQlInputException(__('Couldn\'t save transaction id for order.'));
         }
         return [
-            'payment_id' => $satispayPayment->id,
+            'id' => $satispayPayment->id,
             'amount' => $satispayPayment->amount_unit / 100,
             'status' => $satispayPayment->status,
         ];

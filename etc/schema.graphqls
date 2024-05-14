@@ -1,22 +1,22 @@
 type Query {
-    getSatispayPayment(payment_id: String!): SatispayPayment
+    getSatispayPayment(payment_id: ID!): SatispayPayment
     @resolver(class: "Satispay\\Satispay\\Model\\Resolver\\PaymentStatus")
 }
 
 type Mutation {
-    createSatispayPayment(cart_id: String!): SatispayPayment
+    createSatispayPayment(cart_id: ID!): SatispayPayment
     @resolver(class: "Satispay\\Satispay\\Model\\Resolver\\PaymentRequest")
 }
 
 type SatispayPayment {
-    payment_id: String
+    id: ID!
+    status: StatusEnum!
     amount: Float
-    status: StatusEnum
 }
 
 enum StatusEnum {
+    AUTHORIZED
     PENDING
     ACCEPTED
     CANCELED
-    AUTHORIZED
 }
