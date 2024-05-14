@@ -25,7 +25,11 @@ class PaymentStatus extends ResolverBase implements ResolverInterface
         }
         $paymentId = $args['payment_id'];
 
-        $satispayPayment = \SatispayGBusiness\Payment::get($paymentId);
+        try {
+            $satispayPayment = \SatispayGBusiness\Payment::get($paymentId);
+        } catch (\Exception $e) {
+            throw new GraphQlInputException(__('Payment not found'));
+        }
         return [
             'id' => $satispayPayment->id,
             'amount' => $satispayPayment->amount_unit / 100,
