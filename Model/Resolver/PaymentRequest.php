@@ -68,11 +68,12 @@ class PaymentRequest extends ResolverBase implements ResolverInterface
         $payment = $cart->getPayment();
         if (isset($payment)) {
             $payment->setAdditionalInformation('satispay_payment_id', $satispayPayment->id);
+            $payment->save();
         } else {
             throw new GraphQlInputException(__('Couldn\'t save transaction id for order.'));
         }
         return [
-            'id' => $satispayPayment->id,
+            'id' => strtoupper($satispayPayment->id),
             'amount' => $satispayPayment->amount_unit / 100,
             'status' => $satispayPayment->status,
         ];

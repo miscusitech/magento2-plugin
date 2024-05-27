@@ -45,5 +45,18 @@
             <argument name="satispayConfig" xsi:type="object">Satispay\Satispay\Model\Config</argument>
         </arguments>
     </type>
+        <type name="Satispay\Satispay\Model\Observer\OrderObserver">
+        <arguments>
+            <argument name="satispayConfig" xsi:type="object">Satispay\Satispay\Model\Config</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\QuoteGraphQl\Model\Cart\Payment\AdditionalDataProviderPool">
+        <arguments>
+            <argument name="dataProviders" xsi:type="array">
+                <item name="satispay_payment_id" xsi:type="string">Satispay\Satispay\Model\Resolver\PaymentProvider</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
 
